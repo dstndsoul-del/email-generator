@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gmail Dot Trick Generator | Anthony Muosk</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafc;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 10px;
+    }
+    header h1 { font-size: 24px; color: #111; }
+    header p {
+      color: #555;
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 500px;
+    }
+    .generator-box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+    button {
+      background-color: #2f57ef;
+      color: white;
+      font-size: 16px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    button:hover { background-color: #1f45cc; }
+    .results {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 250px;
+      overflow-y: auto;
+      background: #f4f6fc;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .results p {
+      font-size: 14px;
+      background: #fff;
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin: 5px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Generate Alternative Gmail Addresses</h1>
+    <p>Use Gmail's DOT trick to create multiple versions of your Gmail address. 
+       All emails sent to any variation will still appear in your inbox.</p>
+  </header>
+
+  <div class="generator-box">
+    <input type="email" id="email" placeholder="Enter your Gmail address" />
+    <button onclick="generateEmails()">GENERATE</button>
+    <div id="output" class="results"></div>
+  </div>
+
+  <footer>
+    © 2025 Gmail Dot Trick Generator | Made with ❤️ by Anthony Muosk
+  </footer>
+
+  <script>
+    function generateEmails() {
+      const emailInput = document.getElementById('email').value.trim();
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '';
+
+      if (!emailInput.includes('@gmail.com')) {
+        outputDiv.innerHTML = '<p style="color:red;">Please enter a valid Gmail address.</p>';
+        return;
+      }
+
+      const username = emailInput.split('@')[0];
+      const domain = '@gmail.com';
+
+      const variations = new Set();
+
+      for (let i = 1; i < username.length; i++) {
+        const variant = username.slice(0, i) + '.' + username.slice(i);
+        variations.add(variant + domain);
+      }
+
+      if (variations.size === 0) {
+        outputDiv.innerHTML = '<p>No variations available for this address.</p>';
+        return;
+      }
+
+      outputDiv.innerHTML = '<strong>Generated Addresses:</strong>';
+      variations.forEach(v => {
+        outputDiv.innerHTML += `<p>${v}</p>`;
+      });
+    }
+  </script>
+</body>
+</html>
